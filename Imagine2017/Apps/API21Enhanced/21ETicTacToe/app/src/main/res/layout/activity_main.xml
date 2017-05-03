@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:paddingTop="16dp"
+    tools:context="edu.rit.se.imagine2017.a21Etictactoe.MainActivity">
+
+    <Button
+        android:text="Play Against Myself!"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonHuman"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onClick"
+        android:visibility="invisible"/>
+
+    <Button
+        android:text="Play Against A Friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonComputer"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/buttonHuman"
+        android:layout_alignLeft="@+id/buttonHuman"
+        android:layout_alignStart="@+id/buttonHuman"
+        android:onClick="onClick" />
+
+    <Button
+        android:text="About"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonAbout"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/buttonComputer"
+        android:layout_alignLeft="@+id/buttonComputer"
+        android:layout_alignStart="@+id/buttonComputer"
+        android:onClick="onAboutClick"
+        android:visibility="invisible" />
+
+    <TextView
+        android:id="@+id/textViewUserID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="User ID:" />
+
+</RelativeLayout>
+
+
+
