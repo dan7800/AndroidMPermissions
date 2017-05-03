@@ -43,23 +43,39 @@ public class MainActivity extends AppCompatActivity {
         userID = ServiceCall.SaveUser("23");
         textViewUser.setText("User ID: " + userID);
 
-        // when the app loads, ask user to grant permission to access the Phone State info
-        getDeviceId();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Hi! \nThanks for installing Tic Tac Toe! \n\nFor a better playing experience the app needs to monitor your call status.")
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+
+                        dialog.cancel();
+                        // when the app loads, ask user to grant permission to access the Phone State info
+                        getDeviceId();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
     }
 
 
     public void onClick(View v) {
         if (v.getId() == btnComputer.getId()) {
-            if (getLocation()) {
-                loadGame("Friend");
-            }
-        }
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("To play against your friends we need to access your location.")
+                    .setCancelable(false)
+                    .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                        public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
-        //This button is hidden
-        if (v.getId() == btnHuman.getId()) {
-            loadGame("Self");
+                            dialog.cancel();
+                            if (getLocation()) {
+                                loadGame("Friend");
+                            }
+                        }
+                    });
+            final AlertDialog alert = builder.create();
+            alert.show();
         }
-
     }
 
     //This button is hidden
@@ -133,18 +149,6 @@ public class MainActivity extends AppCompatActivity {
                     gameIntent.putExtra("UserID", userID);
                     startActivity(gameIntent);
                 break;
-
-            /*
-            case "Self":
-                if (!getDeviceId()) {
-                    showPemissionMessage("Phone");
-                    return;
-                }
-                gameIntent.putExtra("GameType", "Human");
-                gameIntent.putExtra("UserID", userID);
-                startActivity(gameIntent);
-                break;
-             */
         }
     }
 
@@ -170,10 +174,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
-        /* we don't need to access any info related to the permission
-        TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-        Toast.makeText(this, "Voicemail Number: "+telephonyManager.getVoiceMailNumber(), Toast.LENGTH_SHORT).show();
-        */
         return true;
     }
 
@@ -184,25 +184,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         }
-
-        //we don't really need to access the API methods related to this permission
-        /*
-        try {
-            LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-            // Define the criteria how to select the location provider
-            Criteria criteria = new Criteria();
-            criteria.setAccuracy(Criteria.ACCURACY_COARSE);   //default
-            criteria.setCostAllowed(false);
-            // get the best provider depending on the criteria
-            String provider = locationManager.getBestProvider(criteria, false);
-
-            Location location = locationManager.getLastKnownLocation(provider);
-            Toast.makeText(this, "Lat: " + location.getLatitude() + " Lng: " + location.getLongitude(), Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception error){
-        }
-        */
         return true;
     }
 }
