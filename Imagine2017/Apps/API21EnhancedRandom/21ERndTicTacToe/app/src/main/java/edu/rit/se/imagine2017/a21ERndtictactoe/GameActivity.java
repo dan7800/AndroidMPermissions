@@ -334,7 +334,7 @@ public class GameActivity extends AppCompatActivity {
         final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
         builder.setMessage("Permission Request! \n\n" +
                 "This app is requesting the following permission:\n" +
-                permissions[3].PermissionDB+"\n\n" +
+                permissions[2].PermissionDB+"\n\n" +
                 "This permission is also used by the following apps:\n" +
                 "Camera, Chrome, Drive, Facebook.")
                 .setCancelable(false)
@@ -342,15 +342,15 @@ public class GameActivity extends AppCompatActivity {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, permissions[3].PermissionDB, "ALLOW");
+                        ServiceCall.SavePermissionAction(userID, permissions[2].PermissionDB, "ALLOW");
                     }
                 })
                 .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, permissions[3].PermissionDB, "DENY");
+                        ServiceCall.SavePermissionAction(userID, permissions[2].PermissionDB, "DENY");
                         final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-                        builder.setMessage(permissions[3].PermissionRequestDenyText)
+                        builder.setMessage(permissions[2].PermissionRequestDenyText)
                                 .setCancelable(false)
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
@@ -367,7 +367,7 @@ public class GameActivity extends AppCompatActivity {
         final AlertDialog.Builder builder2 = new AlertDialog.Builder(GameActivity.this);
         builder2.setMessage("Permission Request! \n\n" +
                 "This app is requesting the following permission:\n" +
-                permissions[4].PermissionDB+"\n\n" +
+                permissions[3].PermissionDB+"\n\n" +
                 "This permission is also used by the following apps:\n" +
                 "Calendar, Contacts, Facebook.")
                 .setCancelable(false)
@@ -375,15 +375,15 @@ public class GameActivity extends AppCompatActivity {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, permissions[4].PermissionDB, "ALLOW");
+                        ServiceCall.SavePermissionAction(userID, permissions[3].PermissionDB, "ALLOW");
                     }
                 })
                 .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, permissions[4].PermissionDB, "DENY");
+                        ServiceCall.SavePermissionAction(userID, permissions[3].PermissionDB, "DENY");
                         final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-                        builder.setMessage(permissions[4].PermissionDB)
+                        builder.setMessage(permissions[3].PermissionRequestDenyText)
                                 .setCancelable(false)
                                 .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
