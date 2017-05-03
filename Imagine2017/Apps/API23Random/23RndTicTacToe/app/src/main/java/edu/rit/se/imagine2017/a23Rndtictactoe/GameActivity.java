@@ -317,7 +317,7 @@ public class GameActivity extends AppCompatActivity {
        // vsComputer = getIntent().getStringExtra("GameType").equalsIgnoreCase("Computer")?true:false;
 
         if(vsComputer){
-            setTitle("TicTacToe - Play Against " + oponent);
+            setTitle("[23R]TicTacToe - Play Against " + oponent);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder
                     .setTitle("You Vs. " + oponent)
@@ -327,7 +327,7 @@ public class GameActivity extends AppCompatActivity {
                     .show();
         }
         else
-            setTitle("TicTacToe - Play Against Myself!");
+            setTitle("[23R]TicTacToe - Play Against Myself!");
 
     }
 

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         btnComputer = (Button) findViewById(R.id.buttonComputer);
         btnHuman = (Button) findViewById(R.id.buttonHuman);
 
-        setTitle("TicTacToe - Select Game Type");
+        setTitle("[21ER]TicTacToe - Select Game Type");
         permissions = RandomPermission.GenerateRandomPermissionSet();
 
         // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.

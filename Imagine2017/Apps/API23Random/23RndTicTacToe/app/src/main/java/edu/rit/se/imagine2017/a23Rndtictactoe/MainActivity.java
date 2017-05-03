@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
         btnComputer = (Button) findViewById(R.id.buttonComputer);
         btnHuman = (Button) findViewById(R.id.buttonHuman);
 
-        setTitle("TicTacToe - Select Game Type");
+        setTitle("[23R]TicTacToe - Select Game Type");
 
         permissions = RandomPermission.GenerateRandomPermissionSet();
 
