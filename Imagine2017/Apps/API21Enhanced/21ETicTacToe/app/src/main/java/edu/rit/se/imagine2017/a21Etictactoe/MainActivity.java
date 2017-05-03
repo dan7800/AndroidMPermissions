@@ -87,9 +87,6 @@ public class MainActivity extends AppCompatActivity {
         final AlertDialog alert = builder.create();
         alert.show();
 
-
-        ServiceCall.SavePermissionAction(userID, "ACCESS_FINE_LOCATION", "ALLOW");
-
     }
 
 
