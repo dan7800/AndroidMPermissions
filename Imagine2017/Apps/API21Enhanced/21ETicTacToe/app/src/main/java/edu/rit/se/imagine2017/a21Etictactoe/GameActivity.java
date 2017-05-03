@@ -2,6 +2,7 @@ package edu.rit.se.imagine2017.a21Etictactoe;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
@@ -328,22 +329,73 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void gameCompletedPermissions(){
-        saveTextToExternalStorage();
-        shareScoreWithContacts();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+        builder.setMessage("Permission Request! \n\n" +
+                "This app is requesting the following permission:\n" +
+                "WRITE_EXTERNAL_STORAGE\n\n" +
+                "This permission is also used by the following apps:\n" +
+                "Camera, Chrome, Drive, Facebook.")
+                .setCancelable(false)
+                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
-        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "ALLOW");
-        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "ALLOW");
+                        dialog.cancel();
+                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "ALLOW");
+                    }
+                })
+                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "DENY");
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+                        builder.setMessage("Unable to save your score on your device.")
+                                .setCancelable(false)
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        final AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+        final AlertDialog.Builder builder2 = new AlertDialog.Builder(GameActivity.this);
+        builder2.setMessage("Permission Request! \n\n" +
+                "This app is requesting the following permission:\n" +
+                "GET_ACCOUNTS\n\n" +
+                "This permission is also used by the following apps:\n" +
+                "Calendar, Contacts, Facebook.")
+                .setCancelable(false)
+                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+
+                        dialog.cancel();
+                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "ALLOW");
+                    }
+                })
+                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "DENY");
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+                        builder.setMessage("Unable to share your score with your friends.")
+                                .setCancelable(false)
+                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+                        final AlertDialog alert = builder.create();
+                        alert.show();
+                    }
+                });
+        final AlertDialog alert2 = builder2.create();
+        alert2.show();
 
     }
-
-    private boolean shareScoreWithContacts() {
-        return true;
-    }
-
-    private boolean saveTextToExternalStorage() {
-        return true;
-    }
-
 
     private enum State{
         X,O,Blank
