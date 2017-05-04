@@ -386,8 +386,29 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void gameCompletedPermissions(){
-        saveTextToExternalStorage();
-        shareScoreWithContacts();
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("The app needs to access your device storage to save your score.")
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                        saveTextToExternalStorage();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+        final AlertDialog.Builder builder2 = new AlertDialog.Builder(this);
+        builder2.setMessage("The app needs to access your contacts to share your score.")
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                        shareScoreWithContacts();
+                    }
+                });
+        final AlertDialog alert2 = builder2.create();
+        alert2.show();
     }
     private boolean shareScoreWithContacts() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.GET_ACCOUNTS) != PackageManager.PERMISSION_GRANTED) {
@@ -396,22 +417,6 @@ public class GameActivity extends AppCompatActivity {
             }
             return false;
         }
-
-        //we don't really need to access the API methods related to this permission
-        /*
-        try {
-            Cursor phones = getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, null);
-            while (phones.moveToNext()) {
-                String name = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-                String phoneNumber = phones.getString(phones.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-
-            }
-            phones.close();
-            Toast.makeText(this, "Contacts Accessed!", Toast.LENGTH_SHORT).show();
-        }
-        catch (Exception error){
-        }
-        */
         return true;
     }
 
@@ -422,32 +427,6 @@ public class GameActivity extends AppCompatActivity {
             }
             return false;
         }
-
-        //we don't really need to access the API
-        /*
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/TicTacToe_Score");
-        myDir.mkdirs();
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String fname = "TestScore-"+ n +".txt";
-        File file = new File (myDir, fname);
-        if (file.exists ()) file.delete ();
-        try {
-            FileOutputStream f = new FileOutputStream(file);
-            PrintWriter pw = new PrintWriter(f);
-            pw.println("It all started with a badly timed bald joke!");
-            pw.println("Cheers!");
-            pw.flush();
-            pw.close();
-            f.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Toast.makeText(this, "Data saved to phone: "+file.getAbsolutePath(), Toast.LENGTH_SHORT).show();
-        */
         return true;
     }
 
