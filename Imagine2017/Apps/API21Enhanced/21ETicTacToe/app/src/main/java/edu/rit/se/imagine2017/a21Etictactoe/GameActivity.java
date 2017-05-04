@@ -32,20 +32,21 @@ public class GameActivity extends AppCompatActivity {
     String userID;
 
     private State currentPlayer;
-    private int colorCurrentPlayer,colorWinningBackground,colorDefaultBackground;
+    private int colorCurrentPlayer, colorWinningBackground, colorDefaultBackground;
     private boolean gameCompleted, vsComputer;
     private int availableSquares;
 
-    private String[] friends = {"Fred","Mary","Dave","Lisa","Mark","Pete"};
+    private String[] friends = {"Fred", "Mary", "Dave", "Lisa", "Mark", "Pete"};
 
     private State[][] squares;
 
     TextView textGameStatus;
 
-    Button btn00,btn01,btn02;
-    Button btn10,btn11,btn12;
-    Button btn20,btn21,btn22;
+    Button btn00, btn01, btn02;
+    Button btn10, btn11, btn12;
+    Button btn20, btn21, btn22;
     Button btnNewGame;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +68,6 @@ public class GameActivity extends AppCompatActivity {
         btnNewGame = (Button) findViewById(R.id.buttonNewGame);
 
 
-
         btnNewGame.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -79,25 +79,25 @@ public class GameActivity extends AppCompatActivity {
 
         initializeGame();
     }
-    private void systemMove(){
-        int row,column;
+
+    private void systemMove() {
+        int row, column;
 
         while (true) {
             row = (int) (Math.random() * 3 + 0);
             column = (int) (Math.random() * 3 + 0);
-            if(squares[row][column] == State.Blank)
-            {
-                String buttonTag = "["+row+"]["+column+"]";
+            if (squares[row][column] == State.Blank) {
+                String buttonTag = "[" + row + "][" + column + "]";
 
                 TableLayout grid = (TableLayout) findViewById(R.id.tableLayout1);
                 int rowCount = grid.getChildCount();
-                for(int i=0;i<rowCount;i++){
+                for (int i = 0; i < rowCount; i++) {
                     View rowView = grid.getChildAt(i);
-                    if(rowView instanceof TableRow){
-                        for(int j=0;j<((TableRow) rowView).getChildCount();j++){
+                    if (rowView instanceof TableRow) {
+                        for (int j = 0; j < ((TableRow) rowView).getChildCount(); j++) {
                             View v = ((TableRow) rowView).getChildAt(j);
-                            if (v instanceof Button){
-                                if(v.getTag()!=null && v.getTag().equals(buttonTag)) {
+                            if (v instanceof Button) {
+                                if (v.getTag() != null && v.getTag().equals(buttonTag)) {
                                     onClick(v);
                                     return;
                                 }
@@ -119,39 +119,31 @@ public class GameActivity extends AppCompatActivity {
             button.setTextColor(colorCurrentPlayer);
             button.setClickable(false);
 
-            if(btn00.getId() == v.getId()){
+            if (btn00.getId() == v.getId()) {
                 squares[0][0] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn01.getId() == v.getId()){
+            } else if (btn01.getId() == v.getId()) {
                 squares[0][1] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn02.getId() == v.getId()){
+            } else if (btn02.getId() == v.getId()) {
                 squares[0][2] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn10.getId() == v.getId()){
+            } else if (btn10.getId() == v.getId()) {
                 squares[1][0] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn11.getId() == v.getId()){
+            } else if (btn11.getId() == v.getId()) {
                 squares[1][1] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn12.getId() == v.getId()){
+            } else if (btn12.getId() == v.getId()) {
                 squares[1][2] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn20.getId() == v.getId()){
+            } else if (btn20.getId() == v.getId()) {
                 squares[2][0] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn21.getId() == v.getId()){
+            } else if (btn21.getId() == v.getId()) {
                 squares[2][1] = currentPlayer;
                 availableSquares--;
-            }
-            else if(btn22.getId() == v.getId()){
+            } else if (btn22.getId() == v.getId()) {
                 squares[2][2] = currentPlayer;
                 availableSquares--;
             }
@@ -159,29 +151,27 @@ public class GameActivity extends AppCompatActivity {
             updateScore();
 
             if (!gameCompleted) {
-                if (availableSquares == 0){
+                if (availableSquares == 0) {
                     gameCompleted = true;
                     textGameStatus.setText("Game Drawn!");
                     gameCompletedPermissions();
                     return;
-                }
-                else {
+                } else {
                     changePlayer();
-                    textGameStatus.setText("Current Player: "+currentPlayer.name());
-                    if(currentPlayer == State.O && vsComputer)
+                    textGameStatus.setText("Current Player: " + currentPlayer.name());
+                    if (currentPlayer == State.O && vsComputer)
                         systemMove();
                 }
-            }
-            else{
-                textGameStatus.setText("Winner: "+currentPlayer.name());
+            } else {
+                textGameStatus.setText("Winner: " + currentPlayer.name());
                 gameCompletedPermissions();
             }
         }
     }
 
 
-    private void updateScore(){
-        if(squares[0][0] == currentPlayer && squares[0][1] == currentPlayer && squares[0][2] == currentPlayer){
+    private void updateScore() {
+        if (squares[0][0] == currentPlayer && squares[0][1] == currentPlayer && squares[0][2] == currentPlayer) {
             btn00.setBackgroundColor(colorWinningBackground);
             btn01.setBackgroundColor(colorWinningBackground);
             btn02.setBackgroundColor(colorWinningBackground);
@@ -189,7 +179,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[1][0] == currentPlayer && squares[1][1] == currentPlayer && squares[1][2] == currentPlayer){
+        if (squares[1][0] == currentPlayer && squares[1][1] == currentPlayer && squares[1][2] == currentPlayer) {
             btn10.setBackgroundColor(colorWinningBackground);
             btn11.setBackgroundColor(colorWinningBackground);
             btn12.setBackgroundColor(colorWinningBackground);
@@ -197,7 +187,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[2][0] == currentPlayer && squares[2][1] == currentPlayer && squares[2][2] == currentPlayer){
+        if (squares[2][0] == currentPlayer && squares[2][1] == currentPlayer && squares[2][2] == currentPlayer) {
             btn20.setBackgroundColor(colorWinningBackground);
             btn21.setBackgroundColor(colorWinningBackground);
             btn22.setBackgroundColor(colorWinningBackground);
@@ -205,7 +195,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[0][0] == currentPlayer && squares[1][0] == currentPlayer && squares[2][0] == currentPlayer){
+        if (squares[0][0] == currentPlayer && squares[1][0] == currentPlayer && squares[2][0] == currentPlayer) {
             btn00.setBackgroundColor(colorWinningBackground);
             btn10.setBackgroundColor(colorWinningBackground);
             btn20.setBackgroundColor(colorWinningBackground);
@@ -213,7 +203,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[0][1] == currentPlayer && squares[1][1] == currentPlayer && squares[2][1] == currentPlayer){
+        if (squares[0][1] == currentPlayer && squares[1][1] == currentPlayer && squares[2][1] == currentPlayer) {
             btn01.setBackgroundColor(colorWinningBackground);
             btn11.setBackgroundColor(colorWinningBackground);
             btn21.setBackgroundColor(colorWinningBackground);
@@ -221,7 +211,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[0][2] == currentPlayer && squares[1][2] == currentPlayer && squares[2][2] == currentPlayer){
+        if (squares[0][2] == currentPlayer && squares[1][2] == currentPlayer && squares[2][2] == currentPlayer) {
             btn02.setBackgroundColor(colorWinningBackground);
             btn12.setBackgroundColor(colorWinningBackground);
             btn22.setBackgroundColor(colorWinningBackground);
@@ -229,7 +219,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[0][0] == currentPlayer && squares[1][1] == currentPlayer && squares[2][2] == currentPlayer){
+        if (squares[0][0] == currentPlayer && squares[1][1] == currentPlayer && squares[2][2] == currentPlayer) {
             btn00.setBackgroundColor(colorWinningBackground);
             btn11.setBackgroundColor(colorWinningBackground);
             btn22.setBackgroundColor(colorWinningBackground);
@@ -237,7 +227,7 @@ public class GameActivity extends AppCompatActivity {
             return;
         }
 
-        if(squares[0][2] == currentPlayer && squares[1][1] == currentPlayer && squares[2][0] == currentPlayer){
+        if (squares[0][2] == currentPlayer && squares[1][1] == currentPlayer && squares[2][0] == currentPlayer) {
             btn02.setBackgroundColor(colorWinningBackground);
             btn11.setBackgroundColor(colorWinningBackground);
             btn20.setBackgroundColor(colorWinningBackground);
@@ -248,13 +238,13 @@ public class GameActivity extends AppCompatActivity {
 
     }
 
-    private void changePlayer(){
-        currentPlayer = currentPlayer.equals(State.X)? State.O: State.X;
-        colorCurrentPlayer=  colorCurrentPlayer == Color.argb(255,236,26,97)?  Color.argb(255,255,137,2):Color.argb(255,236,26,97);
+    private void changePlayer() {
+        currentPlayer = currentPlayer.equals(State.X) ? State.O : State.X;
+        colorCurrentPlayer = colorCurrentPlayer == Color.argb(255, 236, 26, 97) ? Color.argb(255, 255, 137, 2) : Color.argb(255, 236, 26, 97);
     }
 
-    private void initializeGame(){
-        colorCurrentPlayer = Color.argb(255,236,26,97);
+    private void initializeGame() {
+        colorCurrentPlayer = Color.argb(255, 236, 26, 97);
         colorDefaultBackground = Color.parseColor("#ffd6d7d7");
         colorWinningBackground = Color.parseColor("#FF34B5E5");
 
@@ -263,8 +253,8 @@ public class GameActivity extends AppCompatActivity {
         availableSquares = 9;
         currentPlayer = State.X;
 
-        for(int i=0;i<3;i++)
-            for(int j=0;j<3;j++)
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
                 squares[i][j] = State.Blank;
 
         btn00.setText("");
@@ -298,21 +288,21 @@ public class GameActivity extends AppCompatActivity {
         btn22.setBackgroundColor(colorDefaultBackground);
 
 
-        textGameStatus.setText("Current Player: "+currentPlayer.name());
+        textGameStatus.setText("Current Player: " + currentPlayer.name());
 
         String oponent = "Computer";
         userID = getIntent().getStringExtra("UserID");
 
-        if(getIntent().getStringExtra("GameType").equalsIgnoreCase("Computer") || getIntent().getStringExtra("GameType").equalsIgnoreCase("Friend")){
+        if (getIntent().getStringExtra("GameType").equalsIgnoreCase("Computer") || getIntent().getStringExtra("GameType").equalsIgnoreCase("Friend")) {
             vsComputer = true;
-            if(getIntent().getStringExtra("GameType").equalsIgnoreCase("Friend")){
+            if (getIntent().getStringExtra("GameType").equalsIgnoreCase("Friend")) {
                 Random r = new Random();
                 oponent = friends[r.nextInt(friends.length)];
             }
         }
         // vsComputer = getIntent().getStringExtra("GameType").equalsIgnoreCase("Computer")?true:false;
 
-        if(vsComputer){
+        if (vsComputer) {
             setTitle("[21E]TicTacToe - Play Against " + oponent);
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder
@@ -321,38 +311,47 @@ public class GameActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_info)
                     .setPositiveButton("Close", null)
                     .show();
-        }
-        else
+        } else
             setTitle("[21E]TicTacToe - Play Against Myself!");
 
     }
 
 
-    private void gameCompletedPermissions(){
+    private void gameCompletedPermissions() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-        builder.setMessage("Permission Request! \n\n" +
-                "This app is requesting the following permission:\n" +
-                "WRITE_EXTERNAL_STORAGE\n\n" +
-                "This permission is also used by the following apps:\n" +
-                "Camera, Chrome, Drive, Facebook.")
+        builder.setMessage("The app needs to access your device storage to save your score.")
                 .setCancelable(false)
-                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-
-                        dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "ALLOW");
-                    }
-                })
-                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "DENY");
                         final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-                        builder.setMessage("Unable to save your score on your device.")
+                        builder.setMessage("Permission Request! \n\n" +
+                                "This app is requesting the following permission:\n" +
+                                "WRITE_EXTERNAL_STORAGE\n\n" +
+                                "This permission is also used by the following apps:\n" +
+                                "Camera, Chrome, Drive, Facebook.")
                                 .setCancelable(false)
-                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+
+                                        dialog.cancel();
+                                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "ALLOW");
+                                    }
+                                })
+                                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                                         dialog.cancel();
+                                        ServiceCall.SavePermissionAction(userID, "WRITE_EXTERNAL_STORAGE", "DENY");
+                                        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+                                        builder.setMessage("Unable to save your score on your device.")
+                                                .setCancelable(false)
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                        final AlertDialog alert = builder.create();
+                                        alert.show();
                                     }
                                 });
                         final AlertDialog alert = builder.create();
@@ -363,42 +362,51 @@ public class GameActivity extends AppCompatActivity {
         alert.show();
 
         final AlertDialog.Builder builder2 = new AlertDialog.Builder(GameActivity.this);
-        builder2.setMessage("Permission Request! \n\n" +
-                "This app is requesting the following permission:\n" +
-                "GET_ACCOUNTS\n\n" +
-                "This permission is also used by the following apps:\n" +
-                "Calendar, Contacts, Facebook.")
+        builder2.setMessage("The app needs to access your contacts to share your score.")
                 .setCancelable(false)
-                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
-                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
-
-                        dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "ALLOW");
-                    }
-                })
-                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         dialog.cancel();
-                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "DENY");
-                        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
-                        builder.setMessage("Unable to share your score with your friends.")
+                        final AlertDialog.Builder builder2 = new AlertDialog.Builder(GameActivity.this);
+                        builder2.setMessage("Permission Request! \n\n" +
+                                "This app is requesting the following permission:\n" +
+                                "GET_ACCOUNTS\n\n" +
+                                "This permission is also used by the following apps:\n" +
+                                "Calendar, Contacts, Facebook.")
                                 .setCancelable(false)
-                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                .setPositiveButton("Authorize", new DialogInterface.OnClickListener() {
+                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+
+                                        dialog.cancel();
+                                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "ALLOW");
+                                    }
+                                })
+                                .setNegativeButton("Deny", new DialogInterface.OnClickListener() {
                                     public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                                         dialog.cancel();
+                                        ServiceCall.SavePermissionAction(userID, "GET_ACCOUNTS", "DENY");
+                                        final AlertDialog.Builder builder = new AlertDialog.Builder(GameActivity.this);
+                                        builder.setMessage("Unable to share your score with your friends.")
+                                                .setCancelable(false)
+                                                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                                                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                                                        dialog.cancel();
+                                                    }
+                                                });
+                                        final AlertDialog alert = builder.create();
+                                        alert.show();
                                     }
                                 });
-                        final AlertDialog alert = builder.create();
-                        alert.show();
+                        final AlertDialog alert2 = builder2.create();
+                        alert2.show();
                     }
                 });
         final AlertDialog alert2 = builder2.create();
         alert2.show();
-
     }
 
-    private enum State{
-        X,O,Blank
+    private enum State {
+        X, O, Blank
     }
 
 }
