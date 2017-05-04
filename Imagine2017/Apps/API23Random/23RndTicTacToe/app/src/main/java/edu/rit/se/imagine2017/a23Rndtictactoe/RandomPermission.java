@@ -11,12 +11,13 @@ import java.util.Collections;
 public final class RandomPermission {
 
     public static AppPermission[] GenerateRandomPermissionSet() {
-        AppPermission[] permissionArray = new AppPermission[4];
+        //AppPermission[] permissionArray = new AppPermission[4];
+        AppPermission[] permissionArray = new AppPermission[2];
 
         AppPermission permission = new AppPermission();
         permission.Permission = "android.permission.WRITE_EXTERNAL_STORAGE";
         permission.PermissionDB = "WRITE_EXTERNAL_STORAGE";
-        permission.PermissionRequestText="The app needs to access your device storage to store your score";
+        permission.PermissionRequestText="The app needs to access your device storage to save your score";
         permission.PermissionRequestDenyText="Unable access your device storage";
         permission.PermissionRequestAuthorizeText="Your score has been saved on the device";
         permissionArray[0] = permission;
@@ -35,7 +36,7 @@ public final class RandomPermission {
         permission.PermissionRequestText="The app needs to access your network operator for a better user experience";
         permission.PermissionRequestDenyText="Unable to access network operator";
         permission.PermissionRequestAuthorizeText="Network operator accessed";
-        permissionArray[2] = permission;
+      //  permissionArray[2] = permission;
 
         permission = new AppPermission();
         permission.Permission = "android.permission.ACCESS_FINE_LOCATION";
@@ -43,7 +44,7 @@ public final class RandomPermission {
         permission.PermissionRequestText="The app needs to access your location to search for nearby friends";
         permission.PermissionRequestDenyText="Unable to access your location";
         permission.PermissionRequestAuthorizeText="Friends located";
-        permissionArray[3] = permission;
+     //   permissionArray[3] = permission;
 
         Collections.shuffle(Arrays.asList(permissionArray));
         return permissionArray;

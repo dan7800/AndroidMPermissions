@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         userID = ServiceCall.SaveUser("23Rnd");
         textViewUser.setText("User ID: " + userID);
 
+        /*
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Hi! \nThanks for installing Tic Tac Toe! \n\n" + permissions[0].PermissionRequestText)
                 .setCancelable(false)
@@ -57,18 +58,19 @@ public class MainActivity extends AppCompatActivity {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+        */
     }
 
 
     public void onClick(View v) {
         if (v.getId() == btnComputer.getId()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(permissions[1].PermissionRequestText)
+            builder.setMessage(permissions[0].PermissionRequestText)
                     .setCancelable(false)
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                             dialog.cancel();
-                            if (AccessPermissionAPI(permissions[1])) {
+                            if (AccessPermissionAPI(permissions[0])) {
                                 loadGame("Friend");
                             }
                         }
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     String permission = permissions[i];
                     int grantResult = grantResults[i];
 
+                    /*
                     if (permission.equals(this.permissions[0].Permission)) {
                         if (grantResult == PackageManager.PERMISSION_DENIED) {
                             ServiceCall.SavePermissionAction(userID, this.permissions[0].PermissionDB, "DENY");
@@ -104,10 +107,11 @@ public class MainActivity extends AppCompatActivity {
                             ServiceCall.SavePermissionAction(userID, this.permissions[0].PermissionDB, "ALLOW");
                         }
                     }
+                    */
 
-                    if (permission.equals(this.permissions[1].Permission)) {
+                    if (permission.equals(this.permissions[0].Permission)) {
                         if (grantResult == PackageManager.PERMISSION_DENIED) {
-                            ServiceCall.SavePermissionAction(userID, this.permissions[1].PermissionDB, "DENY");
+                            ServiceCall.SavePermissionAction(userID, this.permissions[0].PermissionDB, "DENY");
                             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
                             builder.setMessage(this.permissions[0].PermissionRequestDenyText)
                                     .setCancelable(false)
@@ -121,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             final AlertDialog alert = builder.create();
                             alert.show();
                         } else {
-                            ServiceCall.SavePermissionAction(userID, this.permissions[1].PermissionDB, "ALLOW");
+                            ServiceCall.SavePermissionAction(userID, this.permissions[0].PermissionDB, "ALLOW");
                             loadGame("Friend");
                         }
                     }

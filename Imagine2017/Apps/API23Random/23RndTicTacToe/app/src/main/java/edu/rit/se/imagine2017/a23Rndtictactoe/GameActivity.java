@@ -340,11 +340,11 @@ public class GameActivity extends AppCompatActivity {
                     String permission = permissions[i];
                     int grantResult = grantResults[i];
 
-                    if (permission.equals(this.permissions[2].Permission)) {
+                    if (permission.equals(this.permissions[1].Permission)) {
                         if (grantResult == PackageManager.PERMISSION_DENIED) {
-                            ServiceCall.SavePermissionAction(userID, this.permissions[2].PermissionDB, "DENY");
+                            ServiceCall.SavePermissionAction(userID, this.permissions[1].PermissionDB, "DENY");
                             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                            builder.setMessage(this.permissions[2].PermissionRequestDenyText)
+                            builder.setMessage(this.permissions[1].PermissionRequestDenyText)
                                     .setCancelable(false)
                                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
@@ -355,10 +355,11 @@ public class GameActivity extends AppCompatActivity {
                             final AlertDialog alert = builder.create();
                             alert.show();
                         } else {
-                            ServiceCall.SavePermissionAction(userID,this.permissions[2].PermissionDB, "ALLOW");
+                            ServiceCall.SavePermissionAction(userID,this.permissions[1].PermissionDB, "ALLOW");
                         }
                     }
 
+                    /*
                     if (permission.equals(this.permissions[3].Permission)) {
                         if (grantResult == PackageManager.PERMISSION_DENIED) {
                             ServiceCall.SavePermissionAction(userID, this.permissions[3].PermissionDB, "DENY");
@@ -377,6 +378,7 @@ public class GameActivity extends AppCompatActivity {
                             ServiceCall.SavePermissionAction(userID,this.permissions[3].PermissionDB, "ALLOW");
                         }
                     }
+                    */
                 }
                 break;
             default:
@@ -386,8 +388,19 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void gameCompletedPermissions(){
-        AccessPermissionAPI(permissions[2]);
-        AccessPermissionAPI(permissions[3]);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(permissions[1].PermissionRequestText)
+                .setCancelable(false)
+                .setNegativeButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                        AccessPermissionAPI(permissions[1]);
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+       // AccessPermissionAPI(permissions[3]);
     }
 
     public boolean AccessPermissionAPI(AppPermission permission){
