@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         userID = ServiceCall.SaveUser("21ERnd");
         textViewUser.setText("User ID: " + userID);
 
+        /*
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Hi! \nThanks for installing Tic Tac Toe! \n\n"+permissions[0].PermissionRequestText)
                 .setCancelable(false)
@@ -87,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                 });
         final AlertDialog alert = builder.create();
         alert.show();
+        */
 
     }
 
@@ -94,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     public void onClick(View v) {
         if (v.getId() == btnComputer.getId()) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage(permissions[1].PermissionRequestText)
+            builder.setMessage(permissions[0].PermissionRequestText)
                     .setCancelable(false)
                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                             builder.setMessage("Permission Request! \n\n" +
                                     "This app is requesting the following permission:\n" +
-                                    permissions[1].PermissionDB+"\n\n" +
+                                    permissions[0].PermissionDB+"\n\n" +
                                     "This permission is also used by the following apps:\n" +
                                     "Camera, Facebook, Instagram.")
                                     .setCancelable(false)
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
                                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
                                             dialog.cancel();
-                                            ServiceCall.SavePermissionAction(userID, permissions[1].PermissionDB, "ALLOW");
+                                            ServiceCall.SavePermissionAction(userID, permissions[0].PermissionDB, "ALLOW");
                                                 loadGame("Friend");
                                         }
                                     })
@@ -119,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
                                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
 
                                             dialog.cancel();
-                                            ServiceCall.SavePermissionAction(userID, permissions[1].PermissionDB, "DENY");
+                                            ServiceCall.SavePermissionAction(userID, permissions[0].PermissionDB, "DENY");
                                             final AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                            builder.setMessage(permissions[1].PermissionRequestDenyText)
+                                            builder.setMessage(permissions[0].PermissionRequestDenyText)
                                                     .setCancelable(false)
                                                     .setNegativeButton("OK", new DialogInterface.OnClickListener() {
                                                         public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
