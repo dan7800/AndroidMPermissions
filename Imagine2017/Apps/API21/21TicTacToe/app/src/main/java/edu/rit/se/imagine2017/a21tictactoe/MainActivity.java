@@ -47,9 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("[21]TicTacToe - Select Game Type");
 
-        // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.
-        userID = ServiceCall.SaveUser("21");
+        userID = getIntent().getStringExtra("UserID");
         textViewUser.setText("User ID: " + userID);
+        // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.
+      //  userID = ServiceCall.SaveUser("21");
+     //   textViewUser.setText("User ID: " + userID);
 
         // when the app loads, ask user to grant permission to access the Phone State info
         getDeviceId();

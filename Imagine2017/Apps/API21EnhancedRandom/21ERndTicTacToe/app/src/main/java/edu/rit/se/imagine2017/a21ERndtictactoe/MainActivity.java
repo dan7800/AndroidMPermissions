@@ -47,11 +47,15 @@ public class MainActivity extends AppCompatActivity {
         btnHuman = (Button) findViewById(R.id.buttonHuman);
 
         setTitle("[21ER]TicTacToe - Select Game Type");
+
+        userID = getIntent().getStringExtra("UserID");
+        textViewUser.setText("User ID: " + userID);
+
         permissions = RandomPermission.GenerateRandomPermissionSet();
 
         // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.
-        userID = ServiceCall.SaveUser("21ERnd");
-        textViewUser.setText("User ID: " + userID);
+        //userID = ServiceCall.SaveUser("21ERnd");
+        //textViewUser.setText("User ID: " + userID);
 
         /*
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);

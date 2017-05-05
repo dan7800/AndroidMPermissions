@@ -41,7 +41,7 @@ public class GameActivity extends AppCompatActivity {
 
     private State[][] squares;
 
-    TextView textGameStatus;
+    TextView textGameStatus,textUserId;
 
     Button btn00,btn01,btn02;
     Button btn10,btn11,btn12;
@@ -66,7 +66,7 @@ public class GameActivity extends AppCompatActivity {
 
         textGameStatus = (TextView) findViewById(R.id.textGameStatus);
         btnNewGame = (Button) findViewById(R.id.buttonNewGame);
-
+        textUserId = (TextView) findViewById(R.id.textViewUserID);
 
 
         btnNewGame.setOnClickListener(
@@ -304,6 +304,7 @@ public class GameActivity extends AppCompatActivity {
 
         String oponent = "Computer";
         userID = getIntent().getStringExtra("UserID");
+        textUserId.setText("User ID: "+userID);
 
         if(getIntent().getStringExtra("GameType").equalsIgnoreCase("Computer") || getIntent().getStringExtra("GameType").equalsIgnoreCase("Friend")){
             vsComputer = true;

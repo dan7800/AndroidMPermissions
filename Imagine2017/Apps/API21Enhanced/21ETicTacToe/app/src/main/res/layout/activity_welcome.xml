@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_home"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp"
+    android:paddingLeft="64dp"
+    android:paddingRight="64dp"
+    android:paddingTop="16dp"
+    tools:context="edu.rit.se.imagine2017.a21Etictactoe.WelcomeActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:padding="20dp"
+        android:text="This is your User ID. Enter it into your survey form and then click the 'Play Game' button."
+        android:textAppearance="@android:style/TextAppearance.Large"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="30dp" />
+
+    <TextView
+        android:id="@+id/textViewUserId"
+        android:layout_width="313dp"
+        android:layout_height="81dp"
+        android:text="User ID:"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="200dp"
+        android:layout_marginTop="49dp"
+        android:layout_below="@+id/textView"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick"
+        android:text="Play Game"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="341dp"
+        android:layout_marginTop="23dp"
+        android:layout_below="@+id/textViewUserId"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>

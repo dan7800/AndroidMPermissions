@@ -48,9 +48,12 @@ public class MainActivity extends AppCompatActivity {
 
         setTitle("[21E]TicTacToe - Select Game Type");
 
-        // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.
-        userID = ServiceCall.SaveUser("21E");
+        userID = getIntent().getStringExtra("UserID");
         textViewUser.setText("User ID: " + userID);
+
+        // call the web service to create a new user record in the database. The UserId is used as a parameter in other service calls.
+        //userID = ServiceCall.SaveUser("21E");
+        //textViewUser.setText("User ID: " + userID);
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Hi! \nThanks for installing Tic Tac Toe! \n\nFor a better playing experience the app needs to monitor your call status.")
