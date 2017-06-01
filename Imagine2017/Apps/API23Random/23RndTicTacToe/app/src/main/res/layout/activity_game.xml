@@ -23,8 +23,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:textAppearance="@android:style/TextAppearance.Large"
-            android:text="User ID:" />
+            android:text="User ID:"
+            android:textAppearance="@android:style/TextAppearance.Large" />
 
         <TextView
             android:id="@+id/textGameStatus"
